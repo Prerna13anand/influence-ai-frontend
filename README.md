@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# InfluenceAI - Frontend
 
-## Getting Started
+This is the frontend for the InfluenceAI project, built with Next.js and React. It provides a user interface for generating AI-powered LinkedIn content and sharing it.
 
-First, run the development server:
+## Features
 
+* **Interactive Form:** Allows users to input their role and a topic for content generation.
+* **Seamless LinkedIn Login:** Redirects users through a secure OAuth 2.0 flow.
+* **Personalized Dashboard:** Displays a welcome message with the user's LinkedIn name and profile picture.
+* **Content History:** Fetches and displays all previously generated posts from the backend.
+* **One-Click Sharing:** Allows users to post content directly to their LinkedIn profile.
+
+## Tech Stack
+
+* **Framework:** Next.js, React
+* **Styling:** Tailwind CSS
+* **Language:** TypeScript (or JavaScript if you chose that)
+
+---
+
+## Setup and Installation
+
+### 1. Clone the Repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone [https://github.com/YOUR_USERNAME/influenceai-frontend.git](https://github.com/YOUR_USERNAME/influenceai-frontend.git)
+cd influenceai-frontend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install Dependencies
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Run the Development Server
+```bash
+npm run dev
+```
+The application will be available at `http://localhost:3000`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Connect to the Backend
+This frontend is designed to work with its corresponding backend service. Please ensure the [InfluenceAI Backend](https://github.com/YOUR_USERNAME/influence-os-backend) is running locally on `http://127.0.0.1:8000`.
 
-## Learn More
+## Live Demo
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is deployed and live.
+* **Live Application:** [https://influence-ai-frontend.vercel.app/](https://influence-ai-frontend.vercel.app/)
+* **Backend API:** [https://influence-ai-backend.onrender.com/docs](https://influence-ai-backend.onrender.com/docs)
