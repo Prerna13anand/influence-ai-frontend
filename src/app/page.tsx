@@ -27,10 +27,11 @@ export default function HomePage() {
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [userProfile, setUserProfile] = useState<LinkedInProfile | null>(null);
   
-  // NEW: State to handle sharing status
-  const [isSharing, setIsSharing] = useState<number | null>(null); // Store the ID of the post being shared
+  // State to handle sharing status
+  const [isSharing, setIsSharing] = useState<number | null>(null);
   const [shareStatus, setShareStatus] = useState("");
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   // This useEffect hook runs once when the page loads to check for a token
   useEffect(() => {
@@ -47,7 +48,7 @@ export default function HomePage() {
     const fetchUserProfile = async () => {
       if (accessToken) {
         try {
-          const response = await fetch("http://127.0.0.1:8000/users/me", {
+          const response = await fetch(`${API_URL}/users/me`, {
             headers: { Authorization: `Bearer ${accessToken}` },
           });
           if (!response.ok) throw new Error("Failed to fetch user profile");
@@ -63,9 +64,8 @@ export default function HomePage() {
   }, [accessToken]);
 
   const fetchPosts = async () => {
-    // ... (this function is unchanged)
     try {
-        const response = await fetch("http://127.0.0.1:8000/posts");
+        const response = await fetch(`${API_URL}/posts`);
         if (!response.ok) throw new Error("Failed to fetch posts");
         const data = await response.json();
         setPosts(data.sort((a: Post, b: Post) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()));
@@ -75,12 +75,11 @@ export default function HomePage() {
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
-    // ... (this function is unchanged)
     event.preventDefault();
     setIsLoading(true);
     setResult("");
     try {
-        const response = await fetch("http://127.0.0.1:8000/generate-post", {
+        const response = await fetch(`${API_URL}/generate-post`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ role, topic, tone: "professional" }),
@@ -97,7 +96,6 @@ export default function HomePage() {
       }
   };
 
-  // NEW: Function to handle sharing a post
   const handleShare = async (postText: string, postId: number) => {
     if (!accessToken) {
       alert("Please log in with LinkedIn first.");
@@ -107,7 +105,7 @@ export default function HomePage() {
     setShareStatus("Sharing...");
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/posts/share", {
+      const response = await fetch(`${API_URL}/posts/share`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -127,10 +125,9 @@ export default function HomePage() {
       setTimeout(() => {
         setIsSharing(null);
         setShareStatus("");
-      }, 3000); // Reset status after 3 seconds
+      }, 3000);
     }
   };
-
 
   return (
     <main className="flex min-h-screen flex-col items-center bg-gray-900 text-white p-8 font-sans">
@@ -143,7 +140,7 @@ export default function HomePage() {
         ) : (
           <div className="text-center mb-6">
             <a
-              href="http://127.0.0.1:8000/auth/linkedin"
+              href={`${API_URL}/auth/linkedin`}
               className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md transition duration-300"
             >
               Login with LinkedIn to Get Started
@@ -156,7 +153,6 @@ export default function HomePage() {
         </h1>
 
         <form onSubmit={handleSubmit} className="bg-gray-800 p-8 rounded-lg shadow-lg space-y-6">
-          {/* Form inputs are unchanged */}
           <div>
             <label htmlFor="role" className="block text-sm font-medium text-gray-300 mb-2">Your Professional Role</label>
             <input type="text" id="role" value={role} onChange={(e) => setRole(e.target.value)} placeholder="e.g., Software Engineer" className="w-full p-3 bg-gray-700 rounded-md border border-gray-600 focus:ring-2 focus:ring-blue-500 focus:outline-none" required />
@@ -187,7 +183,6 @@ export default function HomePage() {
                     <p className="text-xs text-gray-500">
                         Created at: {new Date(post.created_at).toLocaleString()}
                     </p>
-                    {/* NEW: Share button and status message */}
                     {accessToken && (
                         <div className="flex items-center space-x-4">
                             {shareStatus && isSharing === post.id && <p className="text-sm text-green-400">{shareStatus}</p>}
