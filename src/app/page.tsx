@@ -31,6 +31,7 @@ export default function HomePage() {
   const [isSharing, setIsSharing] = useState<number | null>(null);
   const [shareStatus, setShareStatus] = useState("");
 
+  // The API_URL is now read from your Vercel environment variables
   const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
   // This useEffect hook runs once when the page loads to check for a token
