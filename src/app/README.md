@@ -39,3 +39,9 @@ The application will be available at `http://localhost:3000`.
 
 ### 4. Connect to the Backend
 This frontend is designed to work with its corresponding backend service. Please ensure the [InfluenceAI Backend](https://github.com/YOUR_USERNAME/influence-os-backend) is running locally on `http://127.0.0.1:8000`.
+
+## Live Demo
+
+This project is deployed and live.
+* **Live Application:** [https://influence-ai-frontend.vercel.app/](https://influence-ai-frontend.vercel.app/)
+* **Backend API:** [https://influence-ai-backend.onrender.com/docs](https://influence-ai-backend.onrender.com/docs)
